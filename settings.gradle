@@ -1,4 +1,7 @@
 include(":app")
 include(":common:resources")
 include(":common:theme")
+include(":common:contract")
+include(":repository:tvshow")
+include(":features:mainscreen")
 

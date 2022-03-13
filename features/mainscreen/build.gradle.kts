@@ -1,31 +1,26 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("kotlin-android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
 }
 
 android {
+
     compileSdk = App.compileSdk
 
     defaultConfig {
-        applicationId = "com.jobsity.challenge"
         minSdk = App.minSdk
         targetSdk = App.targetSdk
-        versionCode = App.targetSdk
-        versionName = App.versionName
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
     }
@@ -35,6 +30,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = Kotlin.jvmTarget
+    }
+
     buildFeatures {
         compose = true
     }
@@ -42,23 +41,13 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Compose.version
     }
-
-    kotlinOptions {
-        jvmTarget = Kotlin.jvmTarget
-    }
-
-     packagingOptions {
-         resources {
-             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
-         }
-     }
 }
 
 dependencies {
-    // Android X
-    implementation(AndroidX.appCompat)
-    implementation(AndroidX.constraintLayout)
-    implementation(AndroidX.core)
+    // Internal
+    implementation(project(":common:contract"))
+    implementation(project(":common:theme"))
+    implementation(project(":repository:tvshow"))
 
     // Compose
     implementation(Compose.ui)
@@ -66,16 +55,12 @@ dependencies {
     implementation(Compose.hiltCompose)
     implementation(Compose.tooling)
 
-    // Dagger
+    // Hilt
     implementation(Dagger.hiltAndroid)
     kapt(Dagger.hiltAndroidCompiler)
 
-    // Internal
-    implementation(project(":common:resources"))
-    implementation(project(":common:theme"))
-    implementation(project(":common:contract"))
-    implementation(project(":repository:tvshow"))
-    implementation(project(":features:mainscreen"))
+    // External APIs
+    implementation(API.coil)
 
     // Tests
     testImplementation(Tests.junit)

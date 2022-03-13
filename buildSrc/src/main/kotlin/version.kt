@@ -62,6 +62,7 @@ object AndroidX {
 object API {
     const val volley = "com.android.volley:volley:1.2.1"
     const val gson = "com.google.code.gson:gson:2.8.5"
+    const val coil = "io.coil-kt:coil-compose:1.4.0"
 }
 
 object Tests {
