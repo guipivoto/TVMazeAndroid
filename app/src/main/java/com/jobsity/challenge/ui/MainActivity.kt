@@ -9,6 +9,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.jobsity.challenge.mainscreen.MainScreen
+import com.jobsity.challenge.showdetails.ShowDetailsScreen
 import com.jobsity.challenge.theme.TVTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -18,6 +19,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var mainScreen: MainScreen
+
+    @Inject
+    lateinit var showDetailsScreen: ShowDetailsScreen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +39,6 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun BuildNavGraph() {
-        NavGraph(mainScreen)
+        NavGraph(mainScreen, showDetailsScreen)
     }
 }
