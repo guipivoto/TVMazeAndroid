@@ -64,7 +64,8 @@ dependencies {
     implementation(Compose.ui)
     implementation(Compose.material)
     implementation(Compose.hiltCompose)
-    implementation(Compose.tooling)
+    implementation(Compose.toolingPreview)
+    debugImplementation(Compose.tooling)
 
     // Dagger
     implementation(Dagger.hiltAndroid)

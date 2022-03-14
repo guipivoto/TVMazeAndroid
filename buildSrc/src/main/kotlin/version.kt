@@ -41,7 +41,8 @@ object Compose {
     const val version = "1.1.1"
     const val ui = "androidx.compose.ui:ui:$version"
     const val material = "androidx.compose.material:material:$version"
-    const val tooling = "androidx.compose.ui:ui-tooling-preview:$version"
+    const val tooling = "androidx.compose.ui:ui-tooling:$version"
+    const val toolingPreview = "androidx.compose.ui:ui-tooling-preview:$version"
 
     private const val hiltVersion = "1.0.0"
     const val hiltCompose = "androidx.hilt:hilt-navigation-compose:$hiltVersion"
