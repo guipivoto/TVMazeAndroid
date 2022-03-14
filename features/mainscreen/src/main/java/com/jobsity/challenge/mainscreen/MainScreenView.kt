@@ -46,25 +46,25 @@ fun DisplayTVShows(showList: List<TVShow>, itemClickListener: (TVShow) -> Unit) 
         contentPadding = PaddingValues(minPadding)
     ) {
         items(showList) { show ->
-            TVShowCard(show, itemClickListener)
+            TVShowCard(show.name, show.images?.medium) { itemClickListener(show) }
         }
     }
 }
 
 @Composable
-fun TVShowCard(tvShow: TVShow, onClickListener: (TVShow) -> Unit) {
+fun TVShowCard(showName: String, iconUrl: String?, onClickListener: () -> Unit) {
     Card(
         elevation = cardElevation,
         modifier = Modifier
             .padding(minPadding)
-            .clickable { onClickListener(tvShow) }
+            .clickable { onClickListener() }
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            val painter = rememberImagePainter(data = tvShow.images?.medium)
+            val painter = rememberImagePainter(data = iconUrl)
 
             Image(
                 painter = painter,
-                contentDescription = tvShow.name,
+                contentDescription = showName,
                 modifier = Modifier.aspectRatio(3 / 4f),
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
@@ -73,7 +73,7 @@ fun TVShowCard(tvShow: TVShow, onClickListener: (TVShow) -> Unit) {
             Spacer(modifier = Modifier.height(minPadding))
 
             Text(
-                text = tvShow.name,
+                text = showName,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(60.dp),
