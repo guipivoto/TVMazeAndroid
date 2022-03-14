@@ -5,4 +5,5 @@ include(":common:contract")
 include(":repository:tvshow")
 include(":features:mainscreen")
 include(":features:showdetails")
+include(":services:restapi")
 

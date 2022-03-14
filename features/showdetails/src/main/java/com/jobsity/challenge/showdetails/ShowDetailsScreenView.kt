@@ -2,6 +2,7 @@ package com.jobsity.challenge.showdetails
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,9 +20,10 @@ import androidx.core.text.HtmlCompat
 import coil.compose.rememberImagePainter
 import com.jobsity.challenge.resources.R
 import com.jobsity.challenge.theme.minPadding
-import com.jobsity.challenge.tvshow.data.Episode
+import com.jobsity.challenge.tvshow.data.EpisodeModel
 import com.jobsity.challenge.tvshow.data.Schedule
-import com.jobsity.challenge.tvshow.data.TVShowDetail
+import com.jobsity.challenge.tvshow.data.ShowStatus
+import com.jobsity.challenge.tvshow.data.TVShowModel
 
 @Composable
 internal fun ShowDetailsScreenView(viewModel: ShowDetailsScreenViewModel) {
@@ -39,8 +41,8 @@ internal fun ShowDetailsScreenView(viewModel: ShowDetailsScreenViewModel) {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ShowTVShow(
-    tvShowDetail: TVShowDetail,
-    episodes: List<List<Episode>>?,
+    tvShowDetail: TVShowModel,
+    episodes: List<List<EpisodeModel>>?,
     onEpisodeClicked: (Long) -> Unit
 ) {
     LazyColumn {
@@ -52,7 +54,7 @@ private fun ShowTVShow(
                 premiered = tvShowDetail.premiered,
                 ended = tvShowDetail.ended,
                 schedule = tvShowDetail.schedule,
-                iconUrl = tvShowDetail.images?.original
+                iconUrl = tvShowDetail.imageUrl
             )
         }
 
@@ -82,7 +84,7 @@ private fun ShowTVShow(
 @Composable
 private fun Header(
     showName: String,
-    status: String?,
+    status: ShowStatus,
     genres: List<String>?,
     premiered: String?,
     ended: String?,
@@ -121,19 +123,24 @@ private fun Header(
                 text = stringResource(R.string.show_status, status ?: ""),
                 style = MaterialTheme.typography.body2
             )
+
             Text(text = genres?.toString() ?: "", style = MaterialTheme.typography.body2)
+
             Text(
                 text = stringResource(R.string.show_premiered, premiered ?: Unit),
                 style = MaterialTheme.typography.body2
             )
+
             Text(
                 text = stringResource(R.string.show_ended, ended ?: Unit),
                 style = MaterialTheme.typography.body2
             )
+
             Text(
                 text = stringResource(R.string.show_time, schedule?.time ?: Unit),
                 style = MaterialTheme.typography.body2
             )
+
             Text(
                 text = stringResource(R.string.show_days, schedule?.days ?: Unit),
                 style = MaterialTheme.typography.body2
@@ -161,12 +168,19 @@ private fun Summary(showSummary: String?, modifier: Modifier = Modifier) {
 
 @Composable
 private fun SeasonHeader(seasonNumber: Int) {
-    Text(
-        modifier = Modifier.fillMaxWidth().padding(minPadding),
-        text = stringResource(id = R.string.season_header, seasonNumber),
-        color = MaterialTheme.colors.primary,
-        style = MaterialTheme.typography.body1
-    )
+    Box(
+        modifier = Modifier
+            .height(42.dp)
+            .fillMaxWidth()
+            .background(MaterialTheme.colors.background)
+    ) {
+        Text(
+            modifier = Modifier.fillMaxWidth().padding(minPadding),
+            text = stringResource(id = R.string.season_header, seasonNumber),
+            color = MaterialTheme.colors.primary,
+            style = MaterialTheme.typography.body1
+        )
+    }
 }
 
 @Composable
@@ -180,7 +194,7 @@ fun EpisodesHeader() {
 }
 
 @Composable
-private fun Episode(episode: Episode, onEpisodeClicked: (Long) -> Unit) {
+private fun Episode(episode: EpisodeModel, onEpisodeClicked: (Long) -> Unit) {
     Box(
         modifier = Modifier
             .height(36.dp)
@@ -201,7 +215,7 @@ private fun Episode(episode: Episode, onEpisodeClicked: (Long) -> Unit) {
 fun Test() {
     Header(
         showName = "Under the Dome",
-        status = "Ended",
+        status = ShowStatus.ENDED,
         genres = listOf("Drama", "Science-Fiction", "Thriller"),
         premiered = "2013-06-24",
         ended = "2015-09-10",

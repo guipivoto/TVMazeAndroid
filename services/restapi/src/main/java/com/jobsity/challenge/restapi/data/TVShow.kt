@@ -1,4 +1,4 @@
-package com.jobsity.challenge.tvshow.data
+package com.jobsity.challenge.restapi.data
 
 import com.google.gson.annotations.SerializedName
 

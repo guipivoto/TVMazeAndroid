@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.jobsity.challenge.theme.cardElevation
 import com.jobsity.challenge.theme.minPadding
-import com.jobsity.challenge.tvshow.data.TVShow
+import com.jobsity.challenge.tvshow.data.TVShowModel
 
 @Composable
 internal fun MainScreenView(viewModel: MainScreenViewModel) {
@@ -40,13 +40,13 @@ fun EmptyList() {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun DisplayTVShows(showList: List<TVShow>, itemClickListener: (TVShow) -> Unit) {
+fun DisplayTVShows(showList: List<TVShowModel>, itemClickListener: (TVShowModel) -> Unit) {
     LazyVerticalGrid(
         cells = GridCells.Fixed(integerResource(id = R.integer.main_screen_grid_columns)),
         contentPadding = PaddingValues(minPadding)
     ) {
         items(showList) { show ->
-            TVShowCard(show.name, show.images?.medium) { itemClickListener(show) }
+            TVShowCard(show.name, show.thumbnailUrl) { itemClickListener(show) }
         }
     }
 }

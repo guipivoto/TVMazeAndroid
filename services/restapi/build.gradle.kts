@@ -36,10 +36,6 @@ android {
 }
 
 dependencies {
-
-    // Coroutines
-    implementation(Kotlin.coroutinesAndroid)
-
     // Hilt
     implementation(Dagger.hiltAndroid)
     kapt(Dagger.hiltAndroidCompiler)
@@ -47,9 +43,6 @@ dependencies {
     // Volley
     implementation(API.volley)
     implementation(API.gson)
-
-    // Internal
-    implementation(project(":services:restapi"))
 
     // Tests
     testImplementation(Tests.junit)

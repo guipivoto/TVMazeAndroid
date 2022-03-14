@@ -4,10 +4,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jobsity.challenge.tvshow.TVShowRepository
-import com.jobsity.challenge.tvshow.data.Episode
-import com.jobsity.challenge.tvshow.data.TVShowDetail
+import com.jobsity.challenge.tvshow.data.EpisodeModel
+import com.jobsity.challenge.tvshow.data.TVShowModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -15,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class ShowDetailsScreenViewModel @Inject constructor(
-    val savedStateHandle: SavedStateHandle,
+    private val savedStateHandle: SavedStateHandle,
     private val tvShowRepository: TVShowRepository
 ) : ViewModel() {
 
@@ -25,7 +24,7 @@ internal class ShowDetailsScreenViewModel @Inject constructor(
     val screenState: StateFlow<ScreenState> = _screenState
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             savedStateHandle.get<String?>(ShowDetailsScreen.SHOW_ID_KEY)?.toInt()?.also {
                 val tvShowDetail = tvShowRepository.getShow(it)
                 _screenState.value = ScreenState.Fetched(tvShowDetail)
@@ -41,6 +40,6 @@ internal class ShowDetailsScreenViewModel @Inject constructor(
 
     sealed class ScreenState {
         object Loading : ScreenState()
-        data class Fetched(val tvShowDetail: TVShowDetail, val episodes : List<List<Episode>>? = null) : ScreenState()
+        data class Fetched(val tvShowDetail: TVShowModel, val episodes : List<List<EpisodeModel>>? = null) : ScreenState()
     }
 }
