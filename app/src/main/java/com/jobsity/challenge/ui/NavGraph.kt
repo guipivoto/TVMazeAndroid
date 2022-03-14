@@ -14,10 +14,14 @@ fun NavGraph(mainScreen: MainScreen, showDetailsScreen: ShowDetailsScreen) {
     NavHost(navController = navController, startDestination = mainScreen.destination) {
         mainScreen.onCreateNavGraph(this,  object : MainScreenEvents {
             override fun onItemSelected(showId: Long) {
-                navController.navigate(showDetailsScreen.destination)
+                navController.navigate(ShowDetailsScreen.DESTINATION_NO_ARGS + "/" + showId)
             }
         })
 
-        showDetailsScreen.onCreateNavGraph(this, object : ShowDetailsScreenEvents{})
+        showDetailsScreen.onCreateNavGraph(this, object : ShowDetailsScreenEvents{
+            override fun onEpisodeSelected(episodeId: Long) {
+                println("Episode $episodeId")
+            }
+        })
     }
 }

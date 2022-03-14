@@ -15,9 +15,13 @@ import javax.inject.Inject
  */
 internal class ShowDetailsScreenImpl @Inject constructor() : ShowDetailsScreen {
 
-    override val destination = "show_details_screen"
+    override val destination =
+        ShowDetailsScreen.DESTINATION_NO_ARGS + "/{" + ShowDetailsScreen.SHOW_ID_KEY + "}"
 
-    override fun onCreateNavGraph(navGraphBuilder: NavGraphBuilder, featureEvents: ShowDetailsScreenEvents) {
+    override fun onCreateNavGraph(
+        navGraphBuilder: NavGraphBuilder,
+        featureEvents: ShowDetailsScreenEvents
+    ) {
         navGraphBuilder.composable(destination) {
             val viewModel = hiltViewModel<ShowDetailsScreenViewModel>()
             viewModel.screenEventsHandler = featureEvents

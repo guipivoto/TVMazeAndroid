@@ -2,4 +2,12 @@
 <resources>
     <string name="app_name">Jobsity TV</string>
     <string name="app_main_screen_label">Jobsity TV Home</string>
+    <string name="show_premiered">Premiered: %s</string>
+    <string name="show_ended">Ended: %s</string>
+    <string name="show_time">Time: %s</string>
+    <string name="show_days">Days: %s</string>
+    <string name="show_status">Status: %s</string>
+    <string name="show_description">Show Description</string>
+    <string name="show_episodes">Episodes</string>
+    <string name="season_header">Season %d</string>
 </resources>
