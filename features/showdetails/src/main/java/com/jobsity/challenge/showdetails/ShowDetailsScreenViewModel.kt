@@ -24,8 +24,8 @@ internal class ShowDetailsScreenViewModel @Inject constructor(
     val screenState: StateFlow<ScreenState> = _screenState
 
     init {
-        viewModelScope.launch {
-            savedStateHandle.get<String?>(ShowDetailsScreen.SHOW_ID_KEY)?.toInt()?.also {
+        savedStateHandle.get<String?>(ShowDetailsScreen.SHOW_ID_KEY)?.toLong()?.also {
+            viewModelScope.launch {
                 val tvShowDetail = tvShowRepository.getShow(it)
                 _screenState.value = ScreenState.Fetched(tvShowDetail)
                 val episodes = tvShowRepository.getEpisodes(it)

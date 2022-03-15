@@ -8,6 +8,8 @@
     <string name="show_days">Days: %s</string>
     <string name="show_status">Status: %s</string>
     <string name="show_description">Show Description</string>
+    <string name="episode_description">Episode Description</string>
     <string name="show_episodes">Episodes</string>
     <string name="season_header">Season %d</string>
+    <string name="season_episode_number">Season %d / Episode %d</string>
 </resources>
