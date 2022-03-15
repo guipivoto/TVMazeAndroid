@@ -51,16 +51,17 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun BuildNavGraph() {
-        if (sharedPref.isProvisioned() && !sharedPref.isSecured()) {
-            NavGraph(mainScreen, showDetailsScreen, episodeDetailsScreen, pinCodeScreen)
+        val startingScreen = if (sharedPref.isProvisioned() && !sharedPref.isSecured()) {
+            mainScreen
         } else {
-            NavGraph(
-                mainScreen,
-                showDetailsScreen,
-                episodeDetailsScreen,
-                pinCodeScreen,
-                pinCodeScreen.destination
-            )
+            pinCodeScreen
         }
+        NavGraph(
+            startDestination = startingScreen,
+            mainScreen = mainScreen,
+            showDetailsScreen = showDetailsScreen,
+            episodeDetailsScreen = episodeDetailsScreen,
+            pinCodeScreen = pinCodeScreen
+        )
     }
 }
