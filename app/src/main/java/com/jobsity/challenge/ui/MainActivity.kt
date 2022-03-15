@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.jobsity.challenge.episodedetails.EpisodeDetailsScreen
 import com.jobsity.challenge.mainscreen.MainScreen
+import com.jobsity.challenge.pincode.PinCodeScreen
+import com.jobsity.challenge.settings.SettingsApi
 import com.jobsity.challenge.showdetails.ShowDetailsScreen
 import com.jobsity.challenge.theme.TVTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +29,12 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var episodeDetailsScreen: EpisodeDetailsScreen
 
+    @Inject
+    lateinit var pinCodeScreen: PinCodeScreen
+
+    @Inject
+    lateinit var sharedPref: SettingsApi
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -43,6 +51,16 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun BuildNavGraph() {
-        NavGraph(mainScreen, showDetailsScreen, episodeDetailsScreen)
+        if (sharedPref.isProvisioned() && !sharedPref.isSecured()) {
+            NavGraph(mainScreen, showDetailsScreen, episodeDetailsScreen, pinCodeScreen)
+        } else {
+            NavGraph(
+                mainScreen,
+                showDetailsScreen,
+                episodeDetailsScreen,
+                pinCodeScreen,
+                pinCodeScreen.destination
+            )
+        }
     }
 }

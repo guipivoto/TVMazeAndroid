@@ -79,7 +79,10 @@ dependencies {
     implementation(project(":features:mainscreen"))
     implementation(project(":features:showdetails"))
     implementation(project(":features:episodedetails"))
+    implementation(project(":features:pincode"))
     implementation(project(":services:restapi"))
+    implementation(project(":services:settings"))
+    implementation(project(":services:biometrics"))
 
     // Tests
     testImplementation(Tests.junit)

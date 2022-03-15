@@ -7,6 +7,8 @@ import com.jobsity.challenge.episodedetails.EpisodeDetailsScreen
 import com.jobsity.challenge.episodedetails.EpisodeDetailsScreenEvents
 import com.jobsity.challenge.mainscreen.MainScreen
 import com.jobsity.challenge.mainscreen.MainScreenEvents
+import com.jobsity.challenge.pincode.PinCodeScreen
+import com.jobsity.challenge.pincode.PinCodeScreenEvents
 import com.jobsity.challenge.showdetails.ShowDetailsScreen
 import com.jobsity.challenge.showdetails.ShowDetailsScreenEvents
 
@@ -14,10 +16,12 @@ import com.jobsity.challenge.showdetails.ShowDetailsScreenEvents
 fun NavGraph(
     mainScreen: MainScreen,
     showDetailsScreen: ShowDetailsScreen,
-    episodeDetailsScreen: EpisodeDetailsScreen
+    episodeDetailsScreen: EpisodeDetailsScreen,
+    pinCodeScreen: PinCodeScreen,
+    startDestination : String = mainScreen.destination
 ) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = mainScreen.plainDestination) {
+    NavHost(navController, startDestination) {
         mainScreen.onCreateNavGraph(this,  object : MainScreenEvents {
             override fun onItemSelected(showId: Long) {
                 navController.navigate(showDetailsScreen.plainDestination + "/" + showId)
@@ -31,5 +35,7 @@ fun NavGraph(
         })
 
         episodeDetailsScreen.onCreateNavGraph(this, object : EpisodeDetailsScreenEvents {})
+
+        pinCodeScreen.onCreateNavGraph(this, object : PinCodeScreenEvents {})
     }
 }

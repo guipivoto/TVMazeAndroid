@@ -36,16 +36,12 @@ android {
 }
 
 dependencies {
-
-    // Coroutines
-    implementation(Kotlin.coroutinesAndroid)
+    // Android X
+    implementation(AndroidX.crypto)
 
     // Hilt
     implementation(Dagger.hiltAndroid)
     kapt(Dagger.hiltAndroidCompiler)
-
-    // Internal
-    implementation(project(":services:restapi"))
 
     // Tests
     testImplementation(Tests.junit)

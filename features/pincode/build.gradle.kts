@@ -33,19 +33,37 @@ android {
     kotlinOptions {
         jvmTarget = Kotlin.jvmTarget
     }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = Compose.version
+    }
 }
 
 dependencies {
+    // Internal
+    implementation(project(":common:contract"))
+    implementation(project(":common:theme"))
+    implementation(project(":common:resources"))
+    implementation(project(":services:settings"))
+    implementation(project(":services:biometrics"))
 
-    // Coroutines
-    implementation(Kotlin.coroutinesAndroid)
+    // Compose
+    implementation(Compose.ui)
+    implementation(Compose.material)
+    implementation(Compose.hiltCompose)
+    implementation(Compose.toolingPreview)
+    debugImplementation(Compose.tooling)
 
     // Hilt
     implementation(Dagger.hiltAndroid)
     kapt(Dagger.hiltAndroidCompiler)
 
-    // Internal
-    implementation(project(":services:restapi"))
+    // External APIs
+    implementation(API.coil)
 
     // Tests
     testImplementation(Tests.junit)
