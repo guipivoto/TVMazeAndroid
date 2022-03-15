@@ -78,6 +78,7 @@ dependencies {
     implementation(project(":repository:tvshow"))
     implementation(project(":features:mainscreen"))
     implementation(project(":features:showdetails"))
+    implementation(project(":features:episodedetails"))
     implementation(project(":services:restapi"))
 
     // Tests

@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.jobsity.challenge.episodedetails.EpisodeDetailsScreen
 import com.jobsity.challenge.mainscreen.MainScreen
 import com.jobsity.challenge.showdetails.ShowDetailsScreen
 import com.jobsity.challenge.theme.TVTheme
@@ -22,6 +23,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var showDetailsScreen: ShowDetailsScreen
+
+    @Inject
+    lateinit var episodeDetailsScreen: EpisodeDetailsScreen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +43,6 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun BuildNavGraph() {
-        NavGraph(mainScreen, showDetailsScreen)
+        NavGraph(mainScreen, showDetailsScreen, episodeDetailsScreen)
     }
 }
