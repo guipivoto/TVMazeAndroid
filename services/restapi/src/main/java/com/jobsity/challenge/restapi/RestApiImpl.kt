@@ -41,7 +41,7 @@ internal class RestApiImpl @Inject constructor (@ApplicationContext val appConte
         }
     }
 
-    override suspend fun getShow(showId: Int): TVShowDetail {
+    override suspend fun getShow(showId: Long): TVShowDetail {
         return suspendCoroutine { continuation ->
             Volley.newRequestQueue(appContext)
                 .add(StringRequest(Request.Method.GET, SHOW_GET_URL + showId, { response ->
@@ -58,7 +58,7 @@ internal class RestApiImpl @Inject constructor (@ApplicationContext val appConte
         }
     }
 
-    override suspend fun getEpisodes(showId: Int): List<Episode> {
+    override suspend fun getEpisodes(showId: Long): List<Episode> {
         return suspendCoroutine { continuation ->
             Volley.newRequestQueue(appContext)
                 .add(StringRequest(Request.Method.GET, SHOW_GET_URL + showId + EPISODES_GET_PARAMETER, { response ->
@@ -77,7 +77,7 @@ internal class RestApiImpl @Inject constructor (@ApplicationContext val appConte
         }
     }
 
-    override suspend fun getEpisode(episodeId: Int): EpisodeDetail {
+    override suspend fun getEpisode(episodeId: Long): EpisodeDetail {
         return suspendCoroutine { continuation ->
             Volley.newRequestQueue(appContext)
                 .add(StringRequest(Request.Method.GET, EPISODES_GET_URL + episodeId, { response ->

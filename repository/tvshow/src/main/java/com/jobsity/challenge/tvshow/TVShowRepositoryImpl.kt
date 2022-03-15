@@ -37,7 +37,7 @@ internal class TVShowRepositoryImpl @Inject constructor(private val restApi: Res
     }
 
     @WorkerThread
-    override suspend fun getShow(showId: Int): TVShowModel = withContext(Dispatchers.IO) {
+    override suspend fun getShow(showId: Long): TVShowModel = withContext(Dispatchers.IO) {
         val episode = restApi.getShow(showId)
         TVShowModel(episode.id, episode.name).apply {
             thumbnailUrl = episode.images?.medium
@@ -52,7 +52,7 @@ internal class TVShowRepositoryImpl @Inject constructor(private val restApi: Res
     }
 
     @WorkerThread
-    override suspend fun getEpisodes(showId: Int): List<List<EpisodeModel>> = withContext(Dispatchers.IO) {
+    override suspend fun getEpisodes(showId: Long): List<List<EpisodeModel>> = withContext(Dispatchers.IO) {
         val episodeList = restApi.getEpisodes(showId)
         val result = mutableListOf<List<EpisodeModel>>()
         var season = 1
@@ -79,7 +79,7 @@ internal class TVShowRepositoryImpl @Inject constructor(private val restApi: Res
     }
 
     @WorkerThread
-    override suspend fun getEpisode(episodeId: Int): EpisodeModel = withContext(Dispatchers.IO) {
+    override suspend fun getEpisode(episodeId: Long): EpisodeModel = withContext(Dispatchers.IO) {
         val episode = restApi.getEpisode(episodeId)
         EpisodeModel(episode.id, episode.name).apply {
             season = episode.season

@@ -22,7 +22,7 @@ sealed interface TVShowRepository {
      * @return [TVShowModel] object containing all details about a show
      */
     @WorkerThread
-    suspend fun getShow(showId: Int): TVShowModel
+    suspend fun getShow(showId: Long): TVShowModel
 
     /**
      * Return the list of episodes for a given series separated by season
@@ -30,12 +30,12 @@ sealed interface TVShowRepository {
      * @return A list of episodes for each season
      */
     @WorkerThread
-    suspend fun getEpisodes(showId: Int): List<List<EpisodeModel>>
+    suspend fun getEpisodes(showId: Long): List<List<EpisodeModel>>
     /**
      * Return detailed info about an episode
      * @param episodeId Episode ID on TVMaze
      * @return [EpisodeModel] object containing all details about an episode
      */
     @WorkerThread
-    suspend fun getEpisode(episodeId: Int): EpisodeModel
+    suspend fun getEpisode(episodeId: Long): EpisodeModel
 }
