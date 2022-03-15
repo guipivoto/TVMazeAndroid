@@ -9,8 +9,9 @@ import com.jobsity.challenge.contract.FeatureEvents
 sealed interface ShowDetailsScreen : FeatureContract<ShowDetailsScreenEvents> {
 
     companion object {
-        const val DESTINATION_NO_ARGS : String = "show_details_screen"
-        const val SHOW_ID_KEY : String = "show_id"
+
+        /** Key to be add arguments when navigating to this screen */
+        internal const val SHOW_ID_ARGS: String = "show_id"
     }
 }
 
@@ -23,5 +24,5 @@ interface ShowDetailsScreenEvents : FeatureEvents {
      * Event triggered when user clicks on a Episode
      * @param episodeId ID of the episode clicked by the user
      */
-    fun onEpisodeSelected(episodeId : Long)
+    fun onEpisodeSelected(episodeId: Long)
 }

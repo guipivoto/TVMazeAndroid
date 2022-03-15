@@ -17,16 +17,16 @@ fun NavGraph(
     episodeDetailsScreen: EpisodeDetailsScreen
 ) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = mainScreen.destination) {
+    NavHost(navController = navController, startDestination = mainScreen.plainDestination) {
         mainScreen.onCreateNavGraph(this,  object : MainScreenEvents {
             override fun onItemSelected(showId: Long) {
-                navController.navigate(ShowDetailsScreen.DESTINATION_NO_ARGS + "/" + showId)
+                navController.navigate(showDetailsScreen.plainDestination + "/" + showId)
             }
         })
 
         showDetailsScreen.onCreateNavGraph(this, object : ShowDetailsScreenEvents{
             override fun onEpisodeSelected(episodeId: Long) {
-                navController.navigate(EpisodeDetailsScreen.DESTINATION_NO_ARGS + "/" + episodeId)
+                navController.navigate(episodeDetailsScreen.plainDestination + "/" + episodeId)
             }
         })
 

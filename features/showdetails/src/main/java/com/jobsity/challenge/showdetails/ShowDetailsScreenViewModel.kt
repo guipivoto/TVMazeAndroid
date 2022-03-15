@@ -24,11 +24,12 @@ internal class ShowDetailsScreenViewModel @Inject constructor(
     val screenState: StateFlow<ScreenState> = _screenState
 
     init {
-        savedStateHandle.get<String?>(ShowDetailsScreen.SHOW_ID_KEY)?.toLong()?.also {
+        val showId = savedStateHandle.get<Long>(ShowDetailsScreen.SHOW_ID_ARGS)
+        if(showId != null) {
             viewModelScope.launch {
-                val tvShowDetail = tvShowRepository.getShow(it)
+                val tvShowDetail = tvShowRepository.getShow(showId)
                 _screenState.value = ScreenState.Fetched(tvShowDetail)
-                val episodes = tvShowRepository.getEpisodes(it)
+                val episodes = tvShowRepository.getEpisodes(showId)
                 _screenState.value = ScreenState.Fetched(tvShowDetail, episodes)
             }
         }

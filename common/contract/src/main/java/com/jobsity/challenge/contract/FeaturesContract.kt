@@ -9,7 +9,12 @@ import androidx.navigation.NavGraphBuilder
 interface FeatureContract<in T : FeatureEvents> {
 
     /**
-     * Navigation Name
+     * Plain Navigation Destination (destination without any argument)
+     */
+    val plainDestination: String
+
+    /**
+     * Navigation Destination (destination with any additional argument)
      */
     val destination: String
 

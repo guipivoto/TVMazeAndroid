@@ -2,7 +2,9 @@ package com.jobsity.challenge.episodedetails
 
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,14 +17,18 @@ import javax.inject.Inject
  */
 internal class EpisodeDetailsScreenImpl @Inject constructor() : EpisodeDetailsScreen {
 
-    override val destination =
-        EpisodeDetailsScreen.DESTINATION_NO_ARGS + "/{" + EpisodeDetailsScreen.EPISODE_ID_KEY + "}"
+    override val plainDestination: String = "episode_details_screen"
+
+    override val destination = plainDestination + "/{" + EpisodeDetailsScreen.EPISODE_ID_ARGS + "}"
 
     override fun onCreateNavGraph(
         navGraphBuilder: NavGraphBuilder,
         featureEvents: EpisodeDetailsScreenEvents
     ) {
-        navGraphBuilder.composable(destination) {
+        navGraphBuilder.composable(
+            destination,
+            listOf(navArgument(EpisodeDetailsScreen.EPISODE_ID_ARGS) { type = NavType.LongType })
+        ) {
             val viewModel = hiltViewModel<EpisodeDetailsScreenViewModel>()
             viewModel.screenEventsHandler = featureEvents
             EpisodeDetailsScreenView(viewModel = viewModel)

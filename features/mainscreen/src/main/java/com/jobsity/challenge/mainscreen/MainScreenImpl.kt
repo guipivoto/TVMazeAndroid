@@ -15,7 +15,9 @@ import javax.inject.Inject
  */
 internal class MainScreenImpl @Inject constructor() : MainScreen {
 
-    override val destination = "main_screen"
+    override val plainDestination = "main_screen"
+
+    override val destination = plainDestination
 
     override fun onCreateNavGraph(navGraphBuilder: NavGraphBuilder, featureEvents: MainScreenEvents) {
         navGraphBuilder.composable(destination) {
