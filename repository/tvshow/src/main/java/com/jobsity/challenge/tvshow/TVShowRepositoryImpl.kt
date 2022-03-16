@@ -71,8 +71,8 @@ internal class TVShowRepositoryImpl @Inject constructor(private val restApi: Res
             if(seasonList.isNotEmpty()) {
                 result.add(seasonList.map {
                     EpisodeModel(it.id, it.name).apply {
-                        season = it.season
-                        number = it.number
+                        this.season = it.season
+                        this.number = it.number
                     }
                 })
                 season++

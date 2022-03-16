@@ -24,6 +24,9 @@ android {
             )
         }
     }
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -49,5 +52,7 @@ dependencies {
 
     // Tests
     testImplementation(Tests.junit)
+    testImplementation(Tests.mockito)
+    testImplementation(Tests.coroutines)
     androidTestImplementation(Tests.testRunner)
 }

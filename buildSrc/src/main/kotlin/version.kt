@@ -72,4 +72,6 @@ object API {
 object Tests {
     const val junit = "junit:junit:4.12"
     const val testRunner = "androidx.test.ext:junit:1.1.3"
+    const val mockito = "org.mockito.kotlin:mockito-kotlin:4.0.0"
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
 }
