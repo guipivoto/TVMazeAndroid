@@ -40,7 +40,7 @@ internal fun ShowDetailsScreenView(viewModel: ShowDetailsScreenViewModel) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun ShowTVShow(
+internal fun ShowTVShow(
     tvShowDetail: TVShowModel,
     episodes: List<List<EpisodeModel>>?,
     onEpisodeClicked: (Long) -> Unit
@@ -75,8 +75,8 @@ private fun ShowTVShow(
                 }
 
                 items(season.size) {
-                    Episode(season[it], onEpisodeClicked)
-                }
+                        Episode(season[it], onEpisodeClicked)
+                    }
             }
         }
     }

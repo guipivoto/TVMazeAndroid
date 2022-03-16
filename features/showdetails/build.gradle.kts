@@ -41,6 +41,12 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Compose.version
     }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -66,5 +72,13 @@ dependencies {
 
     // Tests
     testImplementation(Tests.junit)
-    androidTestImplementation(Tests.testRunner)
+    testImplementation(Tests.mockito)
+    testImplementation(Tests.coroutines)
+    testImplementation(Compose.test)
+    testImplementation(Tests.robolectric)
+    testImplementation(Dagger.test)
+    kaptTest(Dagger.testKotlin)
+
+    testImplementation(Tests.espresso)
+    debugImplementation(Compose.testManifest)
 }
