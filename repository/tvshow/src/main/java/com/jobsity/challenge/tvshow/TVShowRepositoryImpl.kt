@@ -5,6 +5,7 @@ import com.jobsity.challenge.restapi.RestApi
 import com.jobsity.challenge.restapi.data.Episode
 import com.jobsity.challenge.restapi.data.TVShowDetail
 import com.jobsity.challenge.tvshow.data.EpisodeModel
+import com.jobsity.challenge.tvshow.data.Schedule
 import com.jobsity.challenge.tvshow.data.ShowStatus
 import com.jobsity.challenge.tvshow.data.TVShowModel
 import dagger.Binds
@@ -45,9 +46,13 @@ internal class TVShowRepositoryImpl @Inject constructor(private val restApi: Res
             summary = episode.summary
             status = episode.toShowStatus()
             type = episode.type
-            genres = episode.genres
+            genres = episode.genres?.map { if(it == "Science-Fiction") "Sci-Fi" else it }
             premiered = episode.premiered
             ended = episode.ended
+            rating = episode.rating?.average ?: 0f
+            episode.schedule?.let {
+                schedule = Schedule(it.time, it.days)
+            }
         }
     }
 

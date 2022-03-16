@@ -22,4 +22,6 @@ data class TVShowModel(val id: Long, val name: String) {
         internal set
     var schedule: Schedule? = null
         internal set
+    var rating: Float = 0f
+        internal set
 }

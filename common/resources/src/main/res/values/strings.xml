@@ -7,6 +7,7 @@
     <string name="show_time">Time: %s</string>
     <string name="show_days">Days: %s</string>
     <string name="show_status">Status: %s</string>
+    <string name="show_rating">Rating: </string>
     <string name="show_description">Show Description</string>
     <string name="episode_description">Episode Description</string>
     <string name="show_episodes">Episodes</string>
@@ -27,5 +28,4 @@
     <string name="pincode_placeholder">1234</string>
     <string name="pincode_show_password">Show Password</string>
     <string name="pincode_hide_password">Hide Password</string>
-
 </resources>

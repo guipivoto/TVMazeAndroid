@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -19,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.text.HtmlCompat
 import coil.compose.rememberImagePainter
 import com.jobsity.challenge.resources.R
-import com.jobsity.challenge.theme.minPadding
+import com.jobsity.challenge.theme.*
 import com.jobsity.challenge.tvshow.data.EpisodeModel
 import com.jobsity.challenge.tvshow.data.Schedule
 import com.jobsity.challenge.tvshow.data.ShowStatus
@@ -54,7 +55,8 @@ private fun ShowTVShow(
                 premiered = tvShowDetail.premiered,
                 ended = tvShowDetail.ended,
                 schedule = tvShowDetail.schedule,
-                iconUrl = tvShowDetail.imageUrl
+                iconUrl = tvShowDetail.imageUrl,
+                rating = tvShowDetail.rating
             )
         }
 
@@ -89,12 +91,13 @@ private fun Header(
     premiered: String?,
     ended: String?,
     schedule: Schedule?,
-    iconUrl: String?
+    iconUrl: String?,
+    rating: Float
 ) {
     Row {
         val painter = rememberImagePainter(data = iconUrl,
             builder = {
-                placeholder(android.R.color.black)
+                placeholder(R.color.blue_500)
             }
         )
 
@@ -119,32 +122,103 @@ private fun Header(
 
             Spacer(modifier = Modifier.height(minPadding))
 
+            val statusColor = if (status == ShowStatus.ENDED) {
+                Red_800
+            } else {
+                Green_800
+            }
             Text(
-                text = stringResource(R.string.show_status, status ?: ""),
-                style = MaterialTheme.typography.body2
+                modifier = Modifier
+                    .background(statusColor, RoundedCornerShape(4.dp))
+                    .padding(2.dp),
+                color = Grey_50,
+                text = status.toString(),
+                style = MaterialTheme.typography.caption
             )
 
-            Text(text = genres?.toString() ?: "", style = MaterialTheme.typography.body2)
+            Spacer(modifier = Modifier.height(minPadding))
+
+            if(genres != null) {
+                Genres(genres)
+            }
+
+            if(rating > 0) {
+                Rating(rating)
+            }
 
             Text(
                 text = stringResource(R.string.show_premiered, premiered ?: Unit),
                 style = MaterialTheme.typography.body2
             )
 
-            Text(
-                text = stringResource(R.string.show_ended, ended ?: Unit),
-                style = MaterialTheme.typography.body2
-            )
+            if(status == ShowStatus.ENDED) {
+                Text(
+                    text = stringResource(R.string.show_ended, ended ?: Unit),
+                    style = MaterialTheme.typography.body2
+                )
+            }
 
-            Text(
-                text = stringResource(R.string.show_time, schedule?.time ?: Unit),
-                style = MaterialTheme.typography.body2
-            )
+            schedule?.let { schedule ->
+                Text(
+                    text = stringResource(R.string.show_time, schedule.time),
+                    style = MaterialTheme.typography.body2
+                )
 
-            Text(
-                text = stringResource(R.string.show_days, schedule?.days ?: Unit),
-                style = MaterialTheme.typography.body2
-            )
+                var daysOfWeek = ""
+                schedule.days.forEach { daysOfWeek += "$it " }
+                Text(
+                    text = stringResource(R.string.show_days, daysOfWeek),
+                    style = MaterialTheme.typography.body2
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun Rating(rating: Float) {
+    var fontColor = Grey_50
+    val backgroundColor = when(rating) {
+        in 0f..4.5f -> Red_800
+        in 4.5f..7.0f -> {
+            fontColor = Grey_900
+            Yellow_600
+        }
+        else -> Green_800
+    }
+    Row {
+        Text(
+        text = stringResource(R.string.show_rating),
+        style = MaterialTheme.typography.body2
+        )
+        Text(
+            modifier = Modifier
+                .background(backgroundColor, RoundedCornerShape(4.dp))
+                .padding(2.dp),
+            maxLines = 1,
+            color = fontColor,
+            text = rating.toString(),
+            style = MaterialTheme.typography.caption
+        )
+    }
+
+}
+
+@Composable
+private fun Genres(genres: List<String>) {
+    Row {
+        genres.forEach {
+            Box(modifier = Modifier.padding(2.dp)) {
+                Text(
+                    modifier = Modifier
+                        .background(Yellow_600, RoundedCornerShape(4.dp))
+                        .padding(2.dp),
+                    maxLines = 1,
+                    color = Grey_900,
+                    text = it,
+                    style = MaterialTheme.typography.caption
+                )
+            }
         }
     }
 }
@@ -175,7 +249,9 @@ private fun SeasonHeader(seasonNumber: Int) {
             .background(MaterialTheme.colors.background)
     ) {
         Text(
-            modifier = Modifier.fillMaxWidth().padding(minPadding),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(minPadding),
             text = stringResource(id = R.string.season_header, seasonNumber),
             color = MaterialTheme.colors.primary,
             style = MaterialTheme.typography.body1
@@ -220,6 +296,7 @@ fun Test() {
         premiered = "2013-06-24",
         ended = "2015-09-10",
         schedule = Schedule("22:00", listOf("Thursday")),
-        iconUrl = "iconURL"
+        iconUrl = "iconURL",
+        rating = 6.8f
     )
 }
