@@ -13,5 +13,8 @@ sealed interface PinCodeScreen : FeatureContract<PinCodeScreenEvents>
  */
 interface PinCodeScreenEvents : FeatureEvents {
 
-
+    /**
+     * Method invoked when user selects the Skip Button and wants to navigate to next screen
+      */
+    fun onPinCodeCompleted(authorized : Boolean)
 }

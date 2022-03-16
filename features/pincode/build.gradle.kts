@@ -54,6 +54,7 @@ dependencies {
     // Compose
     implementation(Compose.ui)
     implementation(Compose.material)
+    implementation(Compose.icons)
     implementation(Compose.hiltCompose)
     implementation(Compose.toolingPreview)
     debugImplementation(Compose.tooling)

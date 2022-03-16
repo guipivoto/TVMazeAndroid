@@ -37,6 +37,11 @@ fun NavGraph(
 
         episodeDetailsScreen.onCreateNavGraph(this, object : EpisodeDetailsScreenEvents {})
 
-        pinCodeScreen.onCreateNavGraph(this, object : PinCodeScreenEvents {})
+        pinCodeScreen.onCreateNavGraph(this, object : PinCodeScreenEvents {
+            override fun onPinCodeCompleted(authorized : Boolean) {
+                navController.popBackStack()
+                navController.navigate(mainScreen.plainDestination)
+            }
+        })
     }
 }

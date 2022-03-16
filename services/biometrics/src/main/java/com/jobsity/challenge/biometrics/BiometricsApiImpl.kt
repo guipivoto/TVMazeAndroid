@@ -14,7 +14,7 @@ import javax.inject.Singleton
 internal class BiometricsApiImpl @Inject constructor(@ApplicationContext val appContext: Context) :
     BiometricsApi {
 
-    override fun isFingerprintSupported(): Boolean = BiometricManager.from(appContext)
+    override fun isBiometricsSupported(): Boolean = BiometricManager.from(appContext)
         .canAuthenticate(BIOMETRIC_STRONG) == BiometricManager.BIOMETRIC_SUCCESS
 }
 

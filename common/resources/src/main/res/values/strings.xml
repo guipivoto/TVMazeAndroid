@@ -12,4 +12,20 @@
     <string name="show_episodes">Episodes</string>
     <string name="season_header">Season %d</string>
     <string name="season_episode_number">Season %d / Episode %d</string>
+    <string name="skip">Skip</string>
+    <string name="enter_your_pin_code">Enter your PIN Code</string>
+    <string name="create_pin_code">Create a PIN Code</string>
+    <string name="welcome">"Welcome Jobsity TV"</string>
+    <string name="create_pin_code_option">Do you want to Create a PIN Code?</string>
+    <string name="biometrics_is_enabled">Biometrics is enabled</string>
+    <string name="confirm_your_identity">Confirm your identity</string>
+    <string name="biometrics_use_pin">Use PIN</string>
+    <string name="biometrics_are_supported">Biometrics is supported</string>
+    <string name="use_biometrics">Use Biometrics on the next time?</string>
+    <string name="no">no</string>
+    <string name="pincode_label">PIN Code</string>
+    <string name="pincode_placeholder">1234</string>
+    <string name="pincode_show_password">Show Password</string>
+    <string name="pincode_hide_password">Hide Password</string>
+
 </resources>

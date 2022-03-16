@@ -9,28 +9,34 @@ sealed interface SettingsApi {
     fun isProvisioned(): Boolean
 
     /**
-     *
+     * Set if the app was provisioned
+     * @param newValue True if the app was provisioned. False otherwise.
      */
     fun setIsProvisioned(newValue : Boolean)
 
-
     /**
-     * Return if user has set an PIN Code to this app
+     * Return if user set a PIN Code to this app
      * @return True if a PIN code was set. False otherwise
      */
-    fun isSecured(): Boolean
+    fun isProtected(): Boolean
 
     /**
-     * Set PIN
-     * @return True if a PIN code was set. False otherwise
+     * Store the PIN code
+     * @param pinCode 4 characters large string that will be used as PIN Code
      */
     fun setPinCode(pinCode: String)
 
     /**
-     * Set PIN
-     * @return True if a PIN code was set. False otherwise
+     * Return if user opted to use Biometrics as authentication method.
+     * @return True if Biometrics should be used as as authentication method
      */
-    fun setUseFingerPrint(useFingerPrint: Boolean)
+    fun useBiometrics(): Boolean
+
+    /**
+     * Set if biometrics should be used as as authentication method
+     * @param useBiometrics Whether Biometrics should be used to authenticate the user or not
+     */
+    fun setUseBiometrics(useBiometrics: Boolean)
 
 
     /**

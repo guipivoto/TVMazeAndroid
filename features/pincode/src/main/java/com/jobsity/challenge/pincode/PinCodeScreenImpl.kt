@@ -15,7 +15,7 @@ import javax.inject.Inject
  */
 internal class PinCodeScreenImpl @Inject constructor() : PinCodeScreen {
 
-    override val plainDestination = "show_details_screen"
+    override val plainDestination = "pin_code_screen"
 
     override val destination = plainDestination
 

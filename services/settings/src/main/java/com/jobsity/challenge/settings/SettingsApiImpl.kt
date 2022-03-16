@@ -18,7 +18,7 @@ internal class SettingsApiImpl @Inject constructor(private val prefService: Shar
             .putBoolean(IS_PROVISIONED_KEY, newValue)
             .apply()
 
-    override fun isSecured(): Boolean =
+    override fun isProtected(): Boolean =
         prefService.getEncryptedSharedPreferences().getBoolean(IS_SECURED_KEY, false)
 
     override fun setPinCode(pinCode: String) {
@@ -28,9 +28,12 @@ internal class SettingsApiImpl @Inject constructor(private val prefService: Shar
         }.apply()
     }
 
-    override fun setUseFingerPrint(useFingerPrint: Boolean) =
+    override fun useBiometrics(): Boolean =
+        prefService.getEncryptedSharedPreferences().getBoolean(USES_BIOMETRICS_KEY, false)
+
+    override fun setUseBiometrics(useBiometrics: Boolean) =
         prefService.getEncryptedSharedPreferences().edit()
-            .putBoolean(IS_USES_FINGERPRINT_KEY, useFingerPrint)
+            .putBoolean(USES_BIOMETRICS_KEY, useBiometrics)
             .apply()
 
     override fun matches(pinCode: String): Boolean =
@@ -44,7 +47,7 @@ internal class SettingsApiImpl @Inject constructor(private val prefService: Shar
 
         const val PIN_VALUE_KEY = "settings_pin_code"
 
-        const val IS_USES_FINGERPRINT_KEY = "settings_uses_fingerprint"
+        const val USES_BIOMETRICS_KEY = "settings_uses_biometrics"
     }
 }
 
