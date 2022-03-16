@@ -17,7 +17,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.text.HtmlCompat
 import coil.compose.rememberImagePainter
 import com.jobsity.challenge.resources.R
 import com.jobsity.challenge.theme.*
@@ -233,7 +232,7 @@ private fun Summary(showSummary: String?, modifier: Modifier = Modifier) {
             modifier = modifier
         )
         Text(
-            text = HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_COMPACT).toString(),
+            text = it,
             style = MaterialTheme.typography.body2,
             modifier = modifier
         )

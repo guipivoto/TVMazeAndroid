@@ -13,7 +13,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
-import androidx.core.text.HtmlCompat
 import coil.compose.rememberImagePainter
 import com.jobsity.challenge.resources.R
 import com.jobsity.challenge.theme.minPadding
@@ -66,7 +65,7 @@ private fun Summary(showSummary: String?) {
             modifier = Modifier.padding(minPadding)
         )
         Text(
-            text = HtmlCompat.fromHtml(it, HtmlCompat.FROM_HTML_MODE_COMPACT).toString(),
+            text = it,
             style = MaterialTheme.typography.body2,
             modifier = Modifier.padding(minPadding)
         )
