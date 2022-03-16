@@ -2,7 +2,7 @@ import org.gradle.api.JavaVersion
 
 object App {
     const val compileSdk = 31
-    const val minSdk = 28
+    const val minSdk = 26
     const val targetSdk = 31
     private const val majorVersion = 1
     private const val minorVersion = 0
@@ -34,6 +34,8 @@ object Dagger {
     const val plugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
     const val hiltAndroid = "com.google.dagger:hilt-android:$version"
     const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:$version"
+    const val test = "com.google.dagger:hilt-android-testing:$version"
+    const val testKotlin = "com.google.dagger:hilt-android-compiler:$version"
 }
 
 object Compose {
@@ -44,6 +46,8 @@ object Compose {
     const val icons = "androidx.compose.material:material-icons-extended:$version"
     const val tooling = "androidx.compose.ui:ui-tooling:$version"
     const val toolingPreview = "androidx.compose.ui:ui-tooling-preview:$version"
+    const val test = "androidx.compose.ui:ui-test-junit4:$version"
+    const val testManifest = "androidx.compose.ui:ui-test-manifest:$version"
 
     private const val hiltVersion = "1.0.0"
     const val hiltCompose = "androidx.hilt:hilt-navigation-compose:$hiltVersion"
@@ -74,4 +78,6 @@ object Tests {
     const val testRunner = "androidx.test.ext:junit:1.1.3"
     const val mockito = "org.mockito.kotlin:mockito-kotlin:4.0.0"
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
+    const val robolectric = "org.robolectric:robolectric:4.7.3"
+    const val espresso = "androidx.test.espresso:espresso-core:3.5.0-alpha04"
 }
