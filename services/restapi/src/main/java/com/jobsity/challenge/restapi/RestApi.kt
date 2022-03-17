@@ -9,8 +9,9 @@ sealed interface RestApi {
 
     /**
      * Return a list of TV shows
+     * @param page Page to be fetched
      */
-    suspend fun getShows(): List<TVShow>
+    suspend fun getShows(page: Int): List<TVShow>
 
     /**
      * Return detailed info about a show

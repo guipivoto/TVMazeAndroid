@@ -12,9 +12,10 @@ sealed interface TVShowRepository {
 
     /**
      * Return a list of TV shows
+     * @param page Page to be fetched
      */
     @WorkerThread
-    suspend fun getShows(): List<TVShowModel>
+    suspend fun getShows(page: Int): List<TVShowModel>
 
     /**
      * Return detailed info about a show

@@ -23,10 +23,10 @@ import kotlin.coroutines.suspendCoroutine
 
 internal class RestApiImpl @Inject constructor (@ApplicationContext val appContext: Context) : RestApi {
 
-    override suspend fun getShows(): List<TVShow> {
+    override suspend fun getShows(page: Int): List<TVShow> {
         return suspendCoroutine { continuation ->
             Volley.newRequestQueue(appContext)
-                .add(StringRequest(Request.Method.GET, SHOW_LIST_GET_URL, { response ->
+                .add(StringRequest(Request.Method.GET, SHOW_LIST_GET_URL + page, { response ->
                     try {
                         val objType = object : TypeToken<List<TVShow>>() {}.type
                         continuation.resumeWith(Result.success(Gson().fromJson(response, objType)))
@@ -96,7 +96,7 @@ internal class RestApiImpl @Inject constructor (@ApplicationContext val appConte
 
     companion object {
         /** URL (GET) to retrieve a list of shows */
-        const val SHOW_LIST_GET_URL = "https://api.tvmaze.com/shows"
+        const val SHOW_LIST_GET_URL = "https://api.tvmaze.com/shows?page="
 
         /** URL (GET) to retrieve a specific show */
         const val SHOW_GET_URL = "https://api.tvmaze.com/shows/"

@@ -29,8 +29,8 @@ internal class TVShowRepositoryImpl @Inject constructor(private val restApi: Res
     TVShowRepository {
 
     @WorkerThread
-    override suspend fun getShows(): List<TVShowModel> = withContext(Dispatchers.IO) {
-        restApi.getShows().map {
+    override suspend fun getShows(page: Int): List<TVShowModel> = withContext(Dispatchers.IO) {
+        restApi.getShows(page).map {
             TVShowModel(it.id, it.name).apply {
                 thumbnailUrl = it.images?.medium
             }

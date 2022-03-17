@@ -26,26 +26,36 @@ import com.jobsity.challenge.tvshow.data.TVShowModel
 @Composable
 internal fun MainScreenView(viewModel: MainScreenViewModel) {
     when (val screenState = viewModel.screenState.collectAsState().value) {
-        is MainScreenViewModel.FetchState.Idle -> EmptyList()
-        is MainScreenViewModel.FetchState.Success -> DisplayTVShows(screenState.tvShows) {
-            viewModel.onItemClicked(it)
+        is MainScreenViewModel.FetchState.Idle -> Unit
+        is MainScreenViewModel.FetchState.Success -> {
+            if(screenState.tvShows.isNotEmpty()) {
+                DisplayTVShows(screenState.tvShows,
+                    { viewModel.onRequestMoreData() }) {
+                    viewModel.onItemClicked(it)
+                }
+            }
         }
     }
 }
 
-@Composable
-fun EmptyList() {
-
-}
-
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun DisplayTVShows(showList: List<TVShowModel>, itemClickListener: (TVShowModel) -> Unit) {
+fun DisplayTVShows(
+    showList: List<TVShowModel>,
+    requestMoreData: () -> Unit,
+    itemClickListener: (TVShowModel) -> Unit
+) {
+    // Request a new page to Rest API when we are almost reaching the end of the list
+    val almostEndingIndex = (showList.size * 0.9).toInt()
+
     LazyVerticalGrid(
         cells = GridCells.Fixed(integerResource(id = R.integer.main_screen_grid_columns)),
         contentPadding = PaddingValues(minPadding)
     ) {
         items(showList) { show ->
+            if (show == showList[almostEndingIndex]) {
+                requestMoreData()
+            }
             TVShowCard(show.name, show.thumbnailUrl) { itemClickListener(show) }
         }
     }

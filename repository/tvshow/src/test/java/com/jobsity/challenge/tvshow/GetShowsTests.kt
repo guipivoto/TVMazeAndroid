@@ -19,20 +19,20 @@ class GetShowsTests {
     @Test
     fun testGetShows_P01() = runBlocking {
         val restApi = mock<RestApi> {
-            on { runBlocking { getShows() } } doReturn emptyList()
+            on { runBlocking { getShows(1) } } doReturn emptyList()
         }
-        val tvShows = TVShowRepositoryImpl(restApi).getShows()
+        val tvShows = TVShowRepositoryImpl(restApi).getShows(1)
         assert(tvShows.isEmpty())
     }
 
     @Test
     fun testGetShows_P02() = runBlocking {
         val restApi = mock<RestApi> {
-            on { runBlocking { getShows() } } doReturn (listOf(TVShow(1, "Test").apply {
+            on { runBlocking { getShows(1) } } doReturn (listOf(TVShow(1, "Test").apply {
                 images = null
             }))
         }
-        val tvShows = TVShowRepositoryImpl(restApi).getShows()
+        val tvShows = TVShowRepositoryImpl(restApi).getShows(1)
         assertEquals(1, tvShows.size)
         assertEquals(1, tvShows[0].id)
         assertEquals("Test", tvShows[0].name)
@@ -43,7 +43,7 @@ class GetShowsTests {
     @Test
     fun testGetShows_P03() = runBlocking {
         val restApi = mock<RestApi> {
-            on { runBlocking { getShows() } } doReturn (listOf(TVShow(1, "Test").apply {
+            on { runBlocking { getShows(1) } } doReturn (listOf(TVShow(1, "Test").apply {
                 images = Image(
                     "https://www.temp.com/thumbnail.jpg",
                     "https://www.temp.com/image.jpg"
@@ -51,7 +51,7 @@ class GetShowsTests {
             }))
         }
         val repository = TVShowRepositoryImpl(restApi)
-        val tvShows = repository.getShows()
+        val tvShows = repository.getShows(1)
         assertEquals(1, tvShows.size)
         assertEquals(1, tvShows[0].id)
         assertEquals("Test", tvShows[0].name)

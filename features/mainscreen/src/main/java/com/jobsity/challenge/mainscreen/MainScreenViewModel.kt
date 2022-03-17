@@ -19,12 +19,18 @@ internal class MainScreenViewModel @Inject constructor(
 
     lateinit var screenEventsHandler : MainScreenEvents
 
+    /** Show list which will be filled as the user scroll for more items */
+    private val currentShowList : MutableList<TVShowModel> = mutableListOf()
+    /** Current page requested to the repository */
+    private var currentPage = 0
+
     private val _screenState : MutableStateFlow<FetchState> = MutableStateFlow(FetchState.Idle)
     val screenState : StateFlow<FetchState> = _screenState
 
     init {
         viewModelScope.launch {
-            _screenState.value = FetchState.Success(tvShowRepository.getShows())
+            currentShowList.addAll(tvShowRepository.getShows(currentPage))
+            _screenState.value = FetchState.Success(currentShowList, currentPage)
         }
     }
 
@@ -32,8 +38,15 @@ internal class MainScreenViewModel @Inject constructor(
         screenEventsHandler.onItemSelected(tvShow.id)
     }
 
+    fun onRequestMoreData() {
+        viewModelScope.launch {
+            currentShowList.addAll(tvShowRepository.getShows(++currentPage))
+            _screenState.value = FetchState.Success(currentShowList, currentPage)
+        }
+    }
+
     sealed class FetchState {
         object Idle : FetchState()
-        data class Success(val tvShows : List<TVShowModel>) : FetchState()
+        data class Success(val tvShows : List<TVShowModel>, val page : Int) : FetchState()
     }
 }
