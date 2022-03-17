@@ -115,7 +115,7 @@ fun UseBiometricsDialog(onDialogButtonSelected: (boolean: Boolean) -> Unit) {
         text = { Text(text = stringResource(id = R.string.use_biometrics)) },
         confirmButton = {
             Button(onClick = { onDialogButtonSelected(true) }) {
-                Text(text = stringResource(id = android.R.string.ok))
+                Text(text = stringResource(id = R.string.yes))
             }
         },
         dismissButton = {

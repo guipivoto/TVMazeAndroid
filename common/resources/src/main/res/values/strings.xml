@@ -22,7 +22,8 @@
     <string name="biometrics_use_pin">Use PIN</string>
     <string name="biometrics_are_supported">Biometrics is supported</string>
     <string name="use_biometrics">Use Biometrics on the next time?</string>
-    <string name="no">no</string>
+    <string name="no">NO</string>
+    <string name="yes">YES</string>
     <string name="pincode_label">PIN Code</string>
     <string name="pincode_placeholder">1234</string>
     <string name="pincode_show_password">Show Password</string>
