@@ -1,6 +1,7 @@
 # Jobsity Android Challenge
 
 This project was created as part of the Jobsity selection process.
+
 It consists of an Android application that should list TV series using the [TVMaze API](https://www.tvmaze.com/api "TVMaze API")
 
 ## Requisites
