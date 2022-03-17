@@ -42,9 +42,9 @@ Those modules are divided as follows:
 - **common**: Common modules to whole app (Resources, Themes, Base classes/interfaces)
 
 ### Tested Devices
-Samsung SM-F700 - API 31 (Android 12)
-Samsung SM-N986 - API 30 (Android 11)
-Samsung SM-G930 - API 26 (Android Oreo)
+- Samsung SM-F700 - API 31 (Android 12)
+- Samsung SM-N986 - API 30 (Android 11)
+- Samsung SM-G930 - API 26 (Android Oreo)
 
 ### Current State/Result
 Below is the current state of the app.
@@ -102,4 +102,5 @@ Below is the current state of the app.
 - There's no Settings screen to change the PIN Code configuration
 
 Mostly, the reason behind those limitations is the fact of the time to complete the task. There wasn't enough time to develop all the features and also refine all the screens and features.
+
 There's room for several improvements.
