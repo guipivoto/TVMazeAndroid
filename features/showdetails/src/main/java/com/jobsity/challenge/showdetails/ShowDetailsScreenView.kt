@@ -94,11 +94,7 @@ private fun Header(
     rating: Float
 ) {
     Row {
-        val painter = rememberImagePainter(data = iconUrl,
-            builder = {
-                placeholder(R.color.blue_500)
-            }
-        )
+        val painter = rememberImagePainter(data = iconUrl)
 
         Image(
             painter = painter,
