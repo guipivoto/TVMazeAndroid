@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Jobsity TV</string>
-    <string name="app_main_screen_label">Jobsity TV Home</string>
     <string name="show_premiered">Premiered: %s</string>
     <string name="show_ended">Ended: %s</string>
     <string name="show_time">Time: %s</string>
