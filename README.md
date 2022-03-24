@@ -1,6 +1,6 @@
-# Jobsity Android Challenge
+# TV Maze API with Android
 
-This project was created as part of the Jobsity selection process.
+This project was created as an exercise to exercise the use of Jetpack Compose
 
 It consists of an Android application that should list TV series using the [TVMaze API](https://www.tvmaze.com/api "TVMaze API")
 
